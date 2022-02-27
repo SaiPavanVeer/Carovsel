@@ -1,0 +1,118 @@
+******HTML CODE******
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Carousel</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+      <div class="content">
+         <div class="images">
+            <img src="/assets/3d1ca6513a3269d4d06985013ac69703.webp">
+            <img src="/assets/abc14a0f0bc8aec79d20048e03d5d5b6.webp">
+            <img src="/assets/c18f6a8c24ee1509a4a61fb8cbd7f79b.webp">
+            <img src="/assets/d7b5f6bb395dbe753d2b5158b39f00f8.webp">
+            <img src="/assets/e7203daff72196f04170957e0b364365.webp">
+         </div>
+         <div class="btm-slides">
+            <span onclick="btm_slide(1)"></span>
+            <span onclick="btm_slide(2)"></span>
+            <span onclick="btm_slide(3)"></span>
+            <span onclick="btm_slide(4)"></span>
+            <span onclick="btm_slide(5)"></span>
+         </div>
+         <div class="sliders left" onclick="side_slide(-1)">
+            <span class="fas fa-angle-left"></span>
+         </div>
+         <div class="sliders right" onclick="side_slide(1)">
+            <span class="fas fa-angle-right"></span>
+         </div>
+      </div>
+      <script src="/app.js"></script>
+   </body>
+</html>
+
+*****CSS*****
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+}
+.content {
+  height: 500px;
+  width: 800px;
+  position: relative;
+}
+.content .images {
+  height: 100%;
+  width: 100%;
+}
+.content .images img {
+  height: 100%;
+  width: 100%;
+}
+.btm-slides {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.btm-slides span {
+  height: 10px;
+  width: 10px;
+  border-radius: 20px;
+  border: 2px solid black;
+  margin: 0 3px;
+  cursor: pointer;
+}
+.sliders {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  cursor: pointer;
+  border: 2px solid rgb(0, 0, 0);
+  background: rgba(255, 255, 255, 0.1);
+}
+.sliders:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.right {
+  right: 0;
+}
+.sliders span {
+  line-height: 41px;
+  font-size: 35px;
+  color: black;
+}
+
+*****JAVASCRIPT*****
+const img = document.querySelectorAll('img');
+const slider = document.querySelectorAll('.btm-slides span');
+var indexValue = 1;
+showImg(indexValue);
+function btm_slide(e){showImg(indexValue = e);}
+function side_slide(e){showImg(indexValue += e);}
+function showImg(e){
+  var i;
+  if(e > img.length){indexValue = 1}
+  if(e < 1){indexValue = img.length}
+  for(i = 0; i < img.length; i++){
+    img[i].style.display = "none";
+  }
+  for(i = 0; i < slider.length; i++){
+    slider[i].style.background = "rgba(255,255,255,0.1)";
+  }
+  img[indexValue-1].style.display = "block";
+  slider[indexValue-1].style.background = "white";
+}
